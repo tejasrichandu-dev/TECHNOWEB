@@ -20,12 +20,12 @@ const Blog1 = () => {
 
   // Latest 3 blogs data
   const latestBlogs = [
-    {
-      id: 8,
-      title: "The Business Value of Cybersecurity: Protecting Data in a Digital-First World",
-      date: "Jan 8, 2025",
-      category: "Cybersecurity",
-      image: "/cyber.jpeg",
+     {
+      id: 1,
+      title: "How Custom ERP Solutions Can Streamline Your Business Operations",
+      date: "July 11, 2025",
+      category: "ERP Solutions",
+      image: "/erp.jpeg",
     },
     {
       id: 2,
@@ -35,14 +35,13 @@ const Blog1 = () => {
       image: "/sme.jpeg",
     },
     {
-      id: 9,
-      title: "Low-Code and No-Code Development: Accelerating Innovation for Businesses",
-      date: "Jan 7, 2025",
-      category: "Development",
-      image: "/low.jpeg",
+      id:6,
+      title: "Building Scalable Web Applications: Key Factors to Consider",
+      date: "January 5, 2025",
+      category: "Web Development",
+      image: "/web.jpeg",
     },
   ];
-
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section with Background Image */}
@@ -213,4 +212,5 @@ const Blog1 = () => {
 };
 
 export default Blog1;
+
 
