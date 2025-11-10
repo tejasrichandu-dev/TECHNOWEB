@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Share2 } from "lucide-react";
 
 const Blog1 = () => {
+  const navigate = useNavigate();
+
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -106,7 +109,7 @@ const Blog1 = () => {
           {/* Back Button and Share */}
           <div className="flex items-center justify-between mb-8">
             <button
-              onClick={() => window.history.back()}
+              onClick={() => navigate("/insights")}
               className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors"
             >
               <ArrowLeft size={20} />
@@ -183,26 +186,24 @@ const Blog1 = () => {
             <h3 className="text-xl font-bold text-gray-900 mb-6">You Might Also Like</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {latestBlogs.map((blog) => (
-                <a
+                <div
                   key={blog.id}
-                  href={`/blog/${blog.id}`}
-                  className="block"
+                  onClick={() => navigate(`/blog/${blog.id}`)}
+                  className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
                 >
-                  <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                    <div className="h-48 overflow-hidden">
-                      <img
-                        src={blog.image}
-                        alt={blog.title}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <span className="text-blue-600 text-xs font-semibold">{blog.category}</span>
-                      <h4 className="text-gray-900 font-bold mt-2 mb-2 line-clamp-2">{blog.title}</h4>
-                      <p className="text-gray-600 text-sm">{blog.date}</p>
-                    </div>
+                  <div className="h-48 overflow-hidden">
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
-                </a>
+                  <div className="p-4">
+                    <span className="text-blue-600 text-xs font-semibold">{blog.category}</span>
+                    <h4 className="text-gray-900 font-bold mt-2 mb-2 line-clamp-2">{blog.title}</h4>
+                    <p className="text-gray-600 text-sm">{blog.date}</p>
+                  </div>
+                </div>
               ))}         
             </div>
           </div>
@@ -213,4 +214,3 @@ const Blog1 = () => {
 };
 
 export default Blog1;
-
