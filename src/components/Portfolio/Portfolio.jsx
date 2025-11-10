@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Contact from '../../components/aboutUs/contact';
 
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Website');
-  const filters = ['Website', 'Mobile Application', 'AI', 'All'];
+
+  const filters = [ 'Website'];
 
   const projects = [
     { id: 1, image: 'https://picsum.photos/400/800?random=1', category: 'Website' },
@@ -24,8 +24,8 @@ export default function Projects() {
     { id: 15, image: 'https://picsum.photos/400/800?random=15', category: 'Mobile Application' },
   ];
 
-  const filteredProjects = activeFilter === 'All'
-    ? projects
+  const filteredProjects = activeFilter === 'All' 
+    ? projects 
     : projects.filter(p => p.category === activeFilter);
 
   return (
@@ -35,6 +35,7 @@ export default function Projects() {
           transition: transform 3s ease-in-out;
           transform: translateY(0);
         }
+
         .project-card:hover .scroll-image {
           transform: translateY(calc(-100% + 320px));
         }
@@ -42,7 +43,7 @@ export default function Projects() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-24">
-        {/* Title Section */}
+        {/* Title Section - Split Layout */}
         <div className="mb-8 flex flex-col md:flex-row md:justify-between md:items-start gap-8">
           <div className="md:w-1/3 md:pl-8">
             <h1 className="text-4xl mb-4 md:mb-0">
@@ -53,7 +54,7 @@ export default function Projects() {
           </div>
           <div className="md:w-1/2">
             <p className="text-gray-600">
-              We are positioned to create deeply connected brands, services, and campaigns to
+              We are positioned to create deeply connected brands, services, and campaigns to 
               create scale and enduring relationships between businesses and customers.
             </p>
           </div>
@@ -94,11 +95,6 @@ export default function Projects() {
           ))}
         </div>
       </main>
-
-      {/* Contact Section */}
-      <Contact />
     </div>
   );
 }
-
-
