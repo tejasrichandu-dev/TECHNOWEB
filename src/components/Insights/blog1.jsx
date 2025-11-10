@@ -24,7 +24,7 @@ const Blog1 = () => {
   // Latest 3 blogs data
   const latestBlogs = [
     {
-      id: 7,
+      id: 8,
       title: "The Business Value of Cybersecurity: Protecting Data in a Digital-First World",
       date: "Jan 8, 2025",
       category: "Cybersecurity",
@@ -214,3 +214,4 @@ const Blog1 = () => {
 };
 
 export default Blog1;
+
