@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Contact from '/Contact'; // Import the Contact component
+import Contact from '../../components/aboutUs/contact';
+
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Website');
@@ -99,4 +100,5 @@ export default function Projects() {
     </div>
   );
 }
+
 
