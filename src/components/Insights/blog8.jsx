@@ -1,8 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, User, Share2 } from "lucide-react";
 
 const Blog7 = () => {
+  const navigate = useNavigate();
+
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -36,7 +39,7 @@ const Blog7 = () => {
       image: "/sme.jpeg",
     },
     {
-      id:9,
+      id: 9,
       title: "Low-Code and No-Code Development: Accelerating Innovation for Businesses",
       date: "Jan 7, 2025",
       category: "Development",
@@ -101,7 +104,6 @@ const Blog7 = () => {
           </motion.div>
         </div>
       </div>
-
       {/* Content Section */}
       <div className="max-w-4xl mx-auto px-5 py-12">
         <motion.div
@@ -112,7 +114,7 @@ const Blog7 = () => {
           {/* Back Button and Share */}
           <div className="flex items-center justify-between mb-8">
             <button
-              onClick={() => window.history.back()}
+              onClick={() => navigate("/insights")}
               className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors"
             >
               <ArrowLeft size={20} />
@@ -126,7 +128,6 @@ const Blog7 = () => {
               Share
             </button>
           </div>
-
           {/* Article Content */}
           <article className="prose prose-lg max-w-none">
             {/* Introduction */}
@@ -138,7 +139,6 @@ const Blog7 = () => {
                 Understanding the business value of cybersecurity is crucial for leaders who want to safeguard their operations and build trust with customers.
               </p>
             </div>
-
             {/* Why Cybersecurity Matters */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Cybersecurity Matters</h2>
@@ -159,7 +159,6 @@ const Blog7 = () => {
                 Cyberattacks are costly. Beyond immediate remediation expenses, breaches can disrupt operations, impact productivity, and damage market reputation. Proactive cybersecurity reduces the likelihood of these losses.
               </p>
             </div>
-
             {/* Common Cybersecurity Threats */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Common Cybersecurity Threats</h2>
@@ -171,7 +170,6 @@ const Blog7 = () => {
                 <li className="text-gray-700 leading-relaxed text-lg mb-2">Data Breaches: Unauthorized access to sensitive customer or corporate information.</li>
               </ul>
             </div>
-
             {/* Strategies to Safeguard Your Business */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Strategies to Safeguard Your Business</h2>
@@ -204,7 +202,6 @@ const Blog7 = () => {
                 Maintain regular backups and a tested recovery plan to minimize downtime in the event of a cyber incident.
               </p>
             </div>
-
             {/* The Business Benefits of Investing in Cybersecurity */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">The Business Benefits of Investing in Cybersecurity</h2>
@@ -215,7 +212,6 @@ const Blog7 = () => {
                 <li className="text-gray-700 leading-relaxed text-lg mb-2">Innovation Enablement – Secure digital infrastructure allows businesses to adopt new technologies confidently.</li>
               </ul>
             </div>
-
             {/* Final Thoughts */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Final Thoughts</h2>
@@ -226,7 +222,6 @@ const Blog7 = () => {
                 At Technoweb, we help businesses build secure IT environments with advanced cybersecurity solutions tailored to their needs.
               </p>
             </div>
-
             {/* Call to Action */}
             <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg p-8 text-center shadow-lg">
               <h3 className="text-2xl font-bold text-white mb-4">
@@ -240,16 +235,15 @@ const Blog7 = () => {
               </button>
             </div>
           </article>
-
           {/* You Might Also Like - Latest 3 Blogs */}
           <div className="mt-12 pt-8 border-t border-gray-200">
             <h3 className="text-xl font-bold text-gray-900 mb-6">You Might Also Like</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {latestBlogs.map((blog) => (
-                <a
+                <div
                   key={blog.id}
-                  href={`/blog/${blog.id}`}
-                  className="block"
+                  onClick={() => navigate(`/blog/${blog.id}`)}
+                  className="cursor-pointer block"
                 >
                   <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                     <div className="h-48 overflow-hidden">
@@ -265,7 +259,7 @@ const Blog7 = () => {
                       <p className="text-gray-600 text-sm">{blog.date}</p>
                     </div>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           </div>
