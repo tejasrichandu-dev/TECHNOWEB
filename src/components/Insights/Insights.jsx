@@ -186,7 +186,6 @@ const Insights = () => {
           Stay ahead with the latest trends, expert opinions, and real-world experiences in technology and business. Explore our articles to gain vital knowledge and find innovative solutions designed to solve complex challenges.
         </motion.p>
       </div>
-
       {/* Content Container */}
       <div className="max-w-7xl mx-auto px-5 py-10">
         {currentPage === 1 ? (
@@ -221,7 +220,6 @@ const Insights = () => {
                     className="w-full h-64 md:h-full object-cover"
                   />
                 </div>
-
                 {/* Content - Right Side */}
                 <div className="md:w-1/2 p-6 flex flex-col justify-center relative">
                   {/* Share Button */}
@@ -256,7 +254,6 @@ const Insights = () => {
                 </div>
               </div>
             </motion.div>
-
             {/* Grid - Cards 2-7 in 3 columns */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
               {blogPosts.slice(1, 7).map((article, index) => (
@@ -398,7 +395,6 @@ const Insights = () => {
             </div>
           </>
         )}
-
         {/* Pagination */}
         <div className="flex justify-center gap-3">
           <button
