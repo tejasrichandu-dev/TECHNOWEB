@@ -29,7 +29,6 @@ const Contact = () => {
     location: "",
     position: "UI/UX Designer",
     resume: null,
-    notRobot: false,
   });
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -307,22 +306,6 @@ const Contact = () => {
                         </p>
                       </label>
                     </div>
-                  </div>
-
-                  {/* Not a Robot Checkbox */}
-                  <div className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="notRobot"
-                      name="notRobot"
-                      checked={formData.notRobot}
-                      onChange={handleInputChange}
-                      required
-                      className="w-4 h-4 text-[#3B82F6] border-gray-300 rounded focus:ring-[#3B82F6]"
-                    />
-                    <label htmlFor="notRobot" className="ml-2 text-sm text-gray-700">
-                      I am not a Robot
-                    </label>
                   </div>
 
                   {/* Submit Button */}
