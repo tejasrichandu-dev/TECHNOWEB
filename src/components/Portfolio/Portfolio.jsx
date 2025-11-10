@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import Contact from '../../components/aboutUs/contact';
 
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Website');
-
-  const filters = [ 'Website'];
-
+  const filters = ['Website']; 
   const projects = [
     { id: 1, image: 'https://picsum.photos/400/800?random=1', category: 'Website' },
     { id: 2, image: 'https://picsum.photos/400/800?random=2', category: 'Website' },
@@ -24,9 +23,8 @@ export default function Projects() {
     { id: 15, image: 'https://picsum.photos/400/800?random=15', category: 'Mobile Application' },
   ];
 
-  const filteredProjects = activeFilter === 'All' 
-    ? projects 
-    : projects.filter(p => p.category === activeFilter);
+  // Always show all projects, regardless of filter
+  const filteredProjects = projects;
 
   return (
     <div className="min-h-screen bg-white">
@@ -35,12 +33,10 @@ export default function Projects() {
           transition: transform 3s ease-in-out;
           transform: translateY(0);
         }
-
         .project-card:hover .scroll-image {
           transform: translateY(calc(-100% + 320px));
         }
       `}</style>
-
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-24">
         {/* Title Section - Split Layout */}
@@ -54,12 +50,12 @@ export default function Projects() {
           </div>
           <div className="md:w-1/2">
             <p className="text-gray-600">
-              We are positioned to create deeply connected brands, services, and campaigns to 
-              create scale and enduring relationships between businesses and customers.
+              We are positioned to create deeply connected brands, services, and
+              campaigns to create scale and enduring relationships between
+              businesses and customers.
             </p>
           </div>
         </div>
-
         {/* Filter Buttons */}
         <div className="flex gap-3 mb-8 flex-wrap justify-center">
           {filters.map((filter) => (
@@ -76,7 +72,6 @@ export default function Projects() {
             </button>
           ))}
         </div>
-
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProjects.map((project) => (
@@ -95,6 +90,8 @@ export default function Projects() {
           ))}
         </div>
       </main>
+     {/* Contact Section */}
+      <Contact />
     </div>
   );
 }
