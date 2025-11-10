@@ -1,7 +1,10 @@
 import React from "react";
 import { ArrowLeft, Calendar, User, Share2 } from "lucide-react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
 
 const Blog2 = () => {
+  const navigate = useNavigate(); // Initialize the navigate function
+
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -28,14 +31,14 @@ const Blog2 = () => {
       image: "/erp.jpeg",
     },
     {
-      id:8,
+      id: 8,
       title: "The Business Value of Cybersecurity: Protecting Data in a Digital-First World",
       date: "Jan 8, 2025",
       category: "Cybersecurity",
       image: "/cyber.jpeg",
     },
     {
-      id:9,
+      id: 9,
       title: "Low-Code and No-Code Development: Accelerating Innovation for Businesses",
       date: "Jan 7, 2025",
       category: "Development",
@@ -68,7 +71,6 @@ const Blog2 = () => {
                 SME Strategy
               </span>
             </div>
-
             <h1 className="text-4xl md:text-5xl font-bold text-black mb-16 leading-tight text-center max-w-5xl mx-auto">
               Digital Transformation for SMEs: Where to Start and How to Scale
             </h1>
@@ -99,7 +101,6 @@ const Blog2 = () => {
           </div>
         </div>
       </div>
-
       {/* Content Section */}
       <div className="max-w-4xl mx-auto px-5 py-12">
         <div>
@@ -120,7 +121,6 @@ const Blog2 = () => {
               Share
             </button>
           </div>
-
           {/* Article Content */}
           <article className="prose prose-lg max-w-none">
             {/* Introduction */}
@@ -132,7 +132,6 @@ const Blog2 = () => {
                 This guide provides a step-by-step roadmap to help SMEs start their digital transformation journey and build a foundation for sustainable growth.
               </p>
             </div>
-
             {/* Why Digital Transformation Matters */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Digital Transformation Matters for SMEs</h2>
@@ -146,7 +145,6 @@ const Blog2 = () => {
                 <li className="text-gray-700 leading-relaxed text-lg">Scalability with cloud and mobile-first technologies that grow with your business.</li>
               </ul>
             </div>
-
             {/* Step-by-Step Guide */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Step-by-Step Guide to Digital Transformation</h2>
@@ -208,7 +206,6 @@ const Blog2 = () => {
                 Digital transformation is an ongoing process. Regularly review the performance of new systems and measure them against your defined goals. Use analytics to gain insights into customer behavior, employee productivity, and overall business performance. Adjust strategies as needed to stay aligned with changing market demands.
               </p>
             </div>
-
             {/* Scaling Up */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Scaling Up: Taking Transformation to the Next Level</h2>
@@ -225,7 +222,6 @@ const Blog2 = () => {
                 Scaling is not about adopting every new technology—it's about choosing the right innovations that align with your business strategy.
               </p>
             </div>
-
             {/* Final Thoughts */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Final Thoughts</h2>
@@ -236,7 +232,6 @@ const Blog2 = () => {
                 At Technoweb, we specialize in guiding SMEs through every step of their digital transformation journey. From consulting and implementation to training and scaling, we provide solutions tailored to your business needs.
               </p>
             </div>
-
             {/* Call to Action */}
             <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg p-8 text-center shadow-lg">
               <h3 className="text-2xl font-bold text-white mb-4">
@@ -250,16 +245,15 @@ const Blog2 = () => {
               </button>
             </div>
           </article>
-
           {/* You Might Also Like - Latest 3 Blogs */}
           <div className="mt-12 pt-8 border-t border-gray-200">
             <h3 className="text-xl font-bold text-gray-900 mb-6">You Might Also Like</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {latestBlogs.map((blog) => (
-                <a
+                <div
                   key={blog.id}
-                  href={`/blog/${blog.id}`}
-                  className="block"
+                  onClick={() => navigate(`/blog/${blog.id}`)} // Use navigate here
+                  className="cursor-pointer block"
                 >
                   <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                     <div className="h-48 overflow-hidden">
@@ -275,7 +269,7 @@ const Blog2 = () => {
                       <p className="text-gray-600 text-sm">{blog.date}</p>
                     </div>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           </div>
@@ -286,3 +280,4 @@ const Blog2 = () => {
 };
 
 export default Blog2;
+
