@@ -21,6 +21,7 @@ const Typewriter = ({ text, speed = 50 }) => {
 
 const Contact = () => {
   const [buttonHovered, setButtonHovered] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true });
   const lineControls = useAnimation();
@@ -33,6 +34,10 @@ const Contact = () => {
 
   const paragraphText =
     "We're a team of passionate designers and thinkers who love transforming bold ideas into powerful digital experiences...";
+
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
 
   return (
     <div className="bg-gray-50">
@@ -69,11 +74,11 @@ const Contact = () => {
                 <Typewriter text="Got a project?" speed={50} />
               </motion.h2>
             </div>
-
             {/* Right CTA Button */}
             <div className="lg:flex lg:items-center lg:ml-auto w-full lg:w-auto">
               <div className="flex items-center w-full lg:w-auto">
                 <motion.button
+                  onClick={togglePopup}
                   className="group bg-[#3B82F6] text-white px-8 py-4 rounded-lg font-semibold text-lg flex items-center gap-3"
                   onHoverStart={() => setButtonHovered(true)}
                   onHoverEnd={() => setButtonHovered(false)}
@@ -96,7 +101,6 @@ const Contact = () => {
               </div>
             </div>
           </div>
-
           {/* Horizontal Line - Animated */}
           <motion.div
             initial={{ width: 0 }}
@@ -104,7 +108,6 @@ const Contact = () => {
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="h-px bg-gray-600 mb-6"
           />
-
           {/* Paragraph Section - Typewriter Animation */}
           <div>
             <p className="text-gray-300 text-lg leading-relaxed max-w-3xl">
@@ -113,6 +116,102 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      {/* Popup */}
+      {isPopupOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full mx-4">
+            <h2 className="text-2xl font-bold text-[#232325] mb-4">
+              Let’s Find the Right Solution for Your Business
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Fill out the form below, and our experts will help you choose the right digital solution to grow your business efficiently.
+            </p>
+            <p className="text-gray-600 mb-6">
+              We can help you:
+              <ul className="list-disc pl-5 mt-2">
+                <li>Identify the solution that fits your business goals</li>
+                <li>Plan a roadmap for implementation</li>
+                <li>Recommend scalable and cost-effective options</li>
+              </ul>
+            </p>
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Full Name*
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Your Name"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                />
+              </div>
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email*
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Enter Your Email"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Mobile*
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="Enter Your Number"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Location*
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter Your Location"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Position*
+                  </label>
+                  <input
+                    type="text"
+                    value="UI/UX Designer"
+                    readOnly
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Upload Resume
+                </label>
+                <input
+                  type="file"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                />
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  className="bg-[#3B82F6] text-white px-6 py-2 rounded-lg font-semibold text-lg"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
