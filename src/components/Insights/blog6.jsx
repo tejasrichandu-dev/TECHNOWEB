@@ -47,7 +47,6 @@ const Blog12 = () => {
     },
   ];
 
-
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section with Background Image and Gradient */}
@@ -61,7 +60,6 @@ const Blog12 = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-gray-50"></div>
         </div>
-
         {/* Hero Content */}
         <div className="relative max-w-6xl mx-auto px-6 pb-12 z-10 w-full">
           <motion.div
@@ -106,7 +104,6 @@ const Blog12 = () => {
           </motion.div>
         </div>
       </div>
-
       {/* Content Section */}
       <div className="max-w-4xl mx-auto px-5 py-12">
         <motion.div
@@ -131,7 +128,6 @@ const Blog12 = () => {
               Share
             </button>
           </div>
-
           {/* Article Content */}
           <article className="prose prose-lg max-w-none">
             {/* Introduction */}
@@ -143,7 +139,6 @@ const Blog12 = () => {
                 That’s why building scalable web applications is essential. Scalability ensures that your application can handle increasing users, data, and transactions smoothly, without compromising on speed, security, or reliability. Let’s explore the key factors to consider when developing web applications that can grow alongside your business.
               </p>
             </div>
-
             {/* What Does Scalability Mean in Web Applications? */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">What Does Scalability Mean in Web Applications?</h2>
@@ -161,7 +156,6 @@ const Blog12 = () => {
                 The best scalable applications are designed to support both, depending on business needs.
               </p>
             </div>
-
             {/* Key Factors to Consider for Scalability */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Key Factors to Consider for Scalability</h2>
@@ -190,7 +184,6 @@ const Blog12 = () => {
                 You can’t scale what you can’t measure. Set up application monitoring tools (like New Relic, Datadog, or Prometheus). Track KPIs such as response time, server load, and error rates. Use analytics to anticipate growth patterns and prepare infrastructure accordingly.
               </p>
             </div>
-
             {/* Common Mistakes to Avoid */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Common Mistakes to Avoid</h2>
@@ -201,7 +194,6 @@ const Blog12 = () => {
                 <li className="text-gray-700 leading-relaxed text-lg mb-2">Overcomplicating architecture, leading to higher maintenance costs.</li>
               </ul>
             </div>
-
             {/* The Business Value of Scalable Applications */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">The Business Value of Scalable Applications</h2>
@@ -214,7 +206,6 @@ const Blog12 = () => {
                 <li className="text-gray-700 leading-relaxed text-lg mb-2">Future readiness, enabling businesses to embrace opportunities without infrastructure limitations.</li>
               </ul>
             </div>
-
             {/* Final Thoughts */}
             <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Final Thoughts</h2>
@@ -225,7 +216,6 @@ const Blog12 = () => {
                 At Technoweb, we specialize in designing and developing scalable web applications that grow with your business, ensuring performance, security, and efficiency at every stage of your journey.
               </p>
             </div>
-
             {/* Call to Action */}
             <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg p-8 text-center shadow-lg">
               <h3 className="text-2xl font-bold text-white mb-4">
@@ -239,39 +229,39 @@ const Blog12 = () => {
               </button>
             </div>
           </article>
-
           {/* You Might Also Like - Latest 3 Blogs */}
-                   <div className="mt-12 pt-8 border-t border-gray-200">
-                     <h3 className="text-xl font-bold text-gray-900 mb-6">You Might Also Like</h3>
-                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                       {latestBlogs.map((blog) => (
-                         <a
-                           key={blog.id}
-                           href={`/blog/${blog.id}`}
-                           className="block"
-                         >
-                           <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                             <div className="h-48 overflow-hidden">
-                               <img
-                                 src={blog.image}
-                                 alt={blog.title}
-                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                               />
-                             </div>
-                             <div className="p-4">
-                               <span className="text-blue-600 text-xs font-semibold">{blog.category}</span>
-                               <h4 className="text-gray-900 font-bold mt-2 mb-2 line-clamp-2">{blog.title}</h4>
-                               <p className="text-gray-600 text-sm">{blog.date}</p>
-                             </div>
-                           </div>
-                         </a>
-                       ))}
-                     </div>
-                   </div>
-                 </motion.div>
-               </div>
-             </div>
-           );
-         };
-         
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-xl font-bold text-gray-900 mb-6">You Might Also Like</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {latestBlogs.map((blog) => (
+                <div
+                  key={blog.id}
+                  onClick={() => navigate(`/blog/${blog.id}`)}
+                  className="cursor-pointer block"
+                >
+                  <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div className="h-48 overflow-hidden">
+                      <img
+                        src={blog.image}
+                        alt={blog.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <span className="text-blue-600 text-xs font-semibold">{blog.category}</span>
+                      <h4 className="text-gray-900 font-bold mt-2 mb-2 line-clamp-2">{blog.title}</h4>
+                      <p className="text-gray-600 text-sm">{blog.date}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
 export default Blog12;
+
