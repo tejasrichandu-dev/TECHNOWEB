@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 
-
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Website');
-
-  const filters = [ 'Website'];
-
+  const filters = ['Website'];
   const projects = [
     { id: 1, image: 'https://picsum.photos/400/800?random=1', category: 'Website' },
     { id: 2, image: 'https://picsum.photos/400/800?random=2', category: 'Website' },
@@ -24,8 +21,8 @@ export default function Projects() {
     { id: 15, image: 'https://picsum.photos/400/800?random=15', category: 'Mobile Application' },
   ];
 
-  const filteredProjects = activeFilter === 'All' 
-    ? projects 
+  const filteredProjects = activeFilter === 'All'
+    ? projects
     : projects.filter(p => p.category === activeFilter);
 
   return (
@@ -35,7 +32,6 @@ export default function Projects() {
           transition: transform 3s ease-in-out;
           transform: translateY(0);
         }
-
         .project-card:hover .scroll-image {
           transform: translateY(calc(-100% + 320px));
         }
@@ -54,7 +50,7 @@ export default function Projects() {
           </div>
           <div className="md:w-1/2">
             <p className="text-gray-600">
-              We are positioned to create deeply connected brands, services, and campaigns to 
+              We are positioned to create deeply connected brands, services, and campaigns to
               create scale and enduring relationships between businesses and customers.
             </p>
           </div>
@@ -94,6 +90,45 @@ export default function Projects() {
             </div>
           ))}
         </div>
+
+        {/* Contact Us Section */}
+        <section className="mt-24 py-12 bg-gray-50 rounded-lg">
+          <div className="max-w-3xl mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Contact Us</h2>
+            <p className="text-gray-600 mb-8">
+              Have a project in mind or want to collaborate? Reach out to us!
+            </p>
+            <form className="space-y-6">
+              <div>
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#006FFD]"
+                />
+              </div>
+              <div>
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#006FFD]"
+                />
+              </div>
+              <div>
+                <textarea
+                  placeholder="Your Message"
+                  rows="4"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#006FFD]"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="px-6 py-3 bg-[#006FFD] text-white rounded-lg font-medium hover:bg-[#0052cc] transition-colors"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </section>
       </main>
     </div>
   );
