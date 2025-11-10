@@ -36,6 +36,18 @@ function HeroSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Pause video on scroll for mobile
+  useEffect(() => {
+    const handleScrollForVideo = () => {
+      if (window.scrollY > 50 && videoRef.current && !videoRef.current.paused) {
+        videoRef.current.pause();
+        setIsVideoPaused(true);
+      }
+    };
+    window.addEventListener("scroll", handleScrollForVideo);
+    return () => window.removeEventListener("scroll", handleScrollForVideo);
+  }, []);
+
   // Scroll down handler
   const handleScrollDown = () => {
     if (heroRef.current) {
@@ -91,6 +103,7 @@ function HeroSection() {
               preload="auto"
               onLoadedData={handleVideoLoad}
               className="w-full h-full object-cover"
+              poster="/video-poster.jpg" // Add a poster for mobile
             >
               <source src="/Landing Video Technoweb.mp4" type="video/mp4" />
               Your browser does not support the video tag.
@@ -143,11 +156,11 @@ function HeroSection() {
           </div>
 
           {/* Main Content */}
-          <div className="relative z-10 max-w-3xl px-4 md:px-10 pt-20 md:pt-28 pointer-events-none">
+          <div className="relative z-10 max-w-3xl px-4 md:px-10 pt-16 md:pt-28 pointer-events-none">
             <span className="inline-block px-3 md:px-4 py-1 mb-4 text-blue-600 border border-blue-600 rounded-full text-sm md:text-base lg:text-lg bg-transparent pointer-events-auto">
               Innovate. Build. Excel.
             </span>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-snug md:leading-tight mb-4 font-sans font-normal text-gray-900">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-snug md:leading-tight mb-4 font-sans font-normal text-gray-900">
               {headingText.split(" ").map((word, index) => {
                 const isBlueWord = ["Websites,", "Apps", "&", "Software"].includes(word);
                 const isBoldWord = ["Software", "Business", "Forward"].includes(word);
@@ -203,7 +216,6 @@ function HeroSection() {
             transform: translateY(8px);
           }
         }
-
         @keyframes slide-up-out {
           0% {
             transform: translateY(0);
@@ -214,7 +226,6 @@ function HeroSection() {
             opacity: 0;
           }
         }
-
         @keyframes slide-down-in {
           0% {
             transform: translateY(-100%);
@@ -225,24 +236,30 @@ function HeroSection() {
             opacity: 1;
           }
         }
-
         .animate-bounce-slow {
           animation: bounce-slow 2s ease-in-out infinite;
         }
-
         .animate-slide-up-out {
-          animation: slide-up-out 0.7s ease-in-out forwards;
+          animation: slide-up-out 0.5s ease-in-out forwards;
         }
-
         .animate-slide-down-in {
-          animation: slide-down-in 0.7s ease-in-out forwards;
+          animation: slide-down-in 0.5s ease-in-out forwards;
         }
-
         /* Mobile-specific adjustments */
         @media (max-width: 768px) {
           .animate-slide-up-out,
           .animate-slide-down-in {
-            animation-duration: 0.5s;
+            animation-duration: 0.3s;
+          }
+          h1 {
+            font-size: 1.5rem !important;
+            line-height: 1.3 !important;
+          }
+          .max-w-3xl {
+            max-width: 100% !important;
+          }
+          .pt-16 {
+            padding-top: 4rem !important;
           }
         }
       `}</style>
