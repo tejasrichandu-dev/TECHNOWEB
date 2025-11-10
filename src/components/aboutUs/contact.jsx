@@ -155,4 +155,4 @@ const ContactPopup = ({ isOpen, onClose }) => {
   );
 };
 
-export default ContactPopup;
+export default Contact;
