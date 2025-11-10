@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import Contact from '../../components/aboutUs/contact';
-
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Website');
-  const filters = ['Website']; 
+  const filters = ['Website']; // Only "Website" filter is visible
   const projects = [
     { id: 1, image: 'https://picsum.photos/400/800?random=1', category: 'Website' },
     { id: 2, image: 'https://picsum.photos/400/800?random=2', category: 'Website' },
@@ -90,8 +88,6 @@ export default function Projects() {
           ))}
         </div>
       </main>
-     {/* Contact Section */}
-      <Contact />
     </div>
   );
 }
