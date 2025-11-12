@@ -96,12 +96,12 @@ function HeroSection() {
             {!videoLoaded && (
               <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200" />
             )}
-            {/* Center Play/Pause Icon Overlay */}
+            {/* Play/Pause Icon Overlay - Center, Slightly Down */}
             <div
               className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${
                 isVideoPaused ? "opacity-100" : "opacity-0"
               }`}
-              style={{ transform: "translate(0, 0)" }}
+              style={{ marginTop: "8%" }}
             >
               <div className="bg-black/60 rounded-full p-3 backdrop-blur-sm">
                 {isVideoPaused ? (
@@ -141,14 +141,14 @@ function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/10 pointer-events-none"></div>
           </div>
 
-          {/* Main Content */}
-          <div className="relative z-10 max-w-3xl px-4 md:px-10 pt-20 md:pt-24 pointer-events-none">
-            <span className="inline-block px-3 md:px-4 py-1 mb-4 text-blue-600 border border-blue-600 rounded-full text-sm md:text-base lg:text-l bg-transparent pointer-events-auto">
+          {/* Main Content - Mobile Optimized */}
+          <div className="relative z-10 w-full max-w-3xl px-4 sm:px-6 md:px-10 pt-24 sm:pt-28 md:pt-32 lg:pt-24 pointer-events-none">
+            <span className="inline-block px-3 py-1 mb-3 sm:mb-4 text-blue-600 border border-blue-600 rounded-full text-xs sm:text-sm md:text-base lg:text-lg bg-white/80 backdrop-blur-sm pointer-events-auto">
               Innovate. Build. Excel.
             </span>
             <h1
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-snug md:leading-tight mb-4 font-sans font-normal text-gray-900"
-              style={{ lineHeight: "1.2" }}
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight sm:leading-snug md:leading-tight mb-3 sm:mb-4 font-sans font-normal text-gray-900"
+              style={{ lineHeight: "1.3" }}
             >
               {headingText.split(" ").map((word, index) => {
                 const isBlueWord = ["Websites,", "Apps", "&", "Software"].includes(word);
@@ -169,13 +169,13 @@ function HeroSection() {
                 <span className="animate-pulse text-gray-600">|</span>
               )}
             </h1>
-            <p className="text-sm sm:text-base text-gray-800 max-w-xl md:max-w-2xl">
+            <p className="text-xs sm:text-sm md:text-base text-gray-800 max-w-full sm:max-w-xl md:max-w-2xl leading-relaxed">
               At Technoweb, we transform your ideas into powerful digital solutions. From websites and apps to custom software and automation tools, we help businesses grow smarter and faster.
             </p>
           </div>
 
           {/* Scroll Down Button with Animation */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
             <div
               className="flex items-center justify-center cursor-pointer group"
               onClick={handleScrollDown}
@@ -184,15 +184,15 @@ function HeroSection() {
                 SCROLL DOWN
               </span>
               <div className="animate-bounce-slow">
-                <div className="w-0 h-0 border-l-[4px] border-r-[4px] border-t-[6px] border-l-transparent border-r-transparent border-t-blue-600 group-hover:border-t-blue-700 transition-colors duration-200"></div>
+                <div className="w-0 h-0 border-l-[4px] border-r-[4px] border-t-[6px] border-l-transparent border-r-transparent border-t-blue-600 group-hover:border-t-blue-700 transition-colors duration-900"></div>
               </div>
             </div>
           </div>
         </section>
       </div>
 
-      {/* Margin-based Spacer */}
-      <div ref={spacerRef} className="relative bg-black" style={{ height: "100vh" }} />
+      {/* Margin-based Spacer
+      <div ref={spacerRef} className="relative bg-black" style={{ height: "100vh" }} /> */}
 
       <style jsx>{`
         @keyframes bounce-slow {
