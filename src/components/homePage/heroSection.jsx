@@ -141,8 +141,8 @@ function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/10 pointer-events-none"></div>
           </div>
 
-          {/* Main Content - Mobile Optimized */}
-          <div className="relative z-10 w-full max-w-3xl px-4 sm:px-6 md:px-10 pt-24 sm:pt-28 md:pt-32 lg:pt-24 pointer-events-none">
+          {/* Main Content - Mobile Optimized with Better Spacing */}
+          <div className="relative z-10 w-full max-w-3xl px-4 sm:px-6 md:px-10 mt-16 sm:mt-20 md:mt-24 lg:mt-0 pointer-events-none">
             <span className="inline-block px-3 py-1 mb-3 sm:mb-4 text-blue-600 border border-blue-600 rounded-full text-xs sm:text-sm md:text-base lg:text-lg bg-white/80 backdrop-blur-sm pointer-events-auto">
               Innovate. Build. Excel.
             </span>
@@ -204,7 +204,6 @@ function HeroSection() {
             transform: translateY(8px);
           }
         }
-
         .animate-bounce-slow {
           animation: bounce-slow 2s ease-in-out infinite;
         }
