@@ -101,34 +101,36 @@ function HeroSection() {
               className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${
                 isVideoPaused ? "opacity-100" : "opacity-0"
               }`}
-              style={{ marginTop: "8%" }}
+              style={{ marginTop: "5%" }}
             >
-              <div className="bg-black/60 rounded-full p-3 backdrop-blur-sm">
+              <div className="bg-black/60 rounded-full p-2 sm:p-2.5 md:p-3 backdrop-blur-sm">
                 {isVideoPaused ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="24"
+                    height="24"
                     viewBox="0 0 24 24"
                     fill="white"
                     stroke="white"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    className="sm:w-7 sm:h-7 md:w-8 md:h-8"
                   >
                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                   </svg>
                 ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
+                    width="24"
+                    height="24"
                     viewBox="0 0 24 24"
                     fill="white"
                     stroke="white"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    className="sm:w-7 sm:h-7 md:w-8 md:h-8"
                   >
                     <rect x="6" y="4" width="4" height="16"></rect>
                     <rect x="14" y="4" width="4" height="16"></rect>
@@ -142,12 +144,12 @@ function HeroSection() {
           </div>
 
           {/* Main Content - Mobile Optimized with Better Spacing */}
-          <div className="relative z-10 w-full max-w-3xl px-4 sm:px-6 md:px-10 mt-16 sm:mt-20 md:mt-24 lg:mt-0 pointer-events-none">
-            <span className="inline-block px-3 py-1 mb-3 sm:mb-4 text-blue-600 border border-blue-600 rounded-full text-xs sm:text-sm md:text-base lg:text-lg bg-white/80 backdrop-blur-sm pointer-events-auto">
+          <div className="relative z-10 w-full max-w-3xl px-4 sm:px-6 md:px-10 mt-12 sm:mt-16 md:mt-20 lg:mt-0 pointer-events-none">
+            <span className="inline-block px-2.5 py-1 mb-2 sm:mb-3 md:mb-4 text-blue-600 border border-blue-600 rounded-full text-[10px] sm:text-xs md:text-sm lg:text-base bg-white/80 backdrop-blur-sm pointer-events-auto">
               Innovate. Build. Excel.
             </span>
             <h1
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight sm:leading-snug md:leading-tight mb-3 sm:mb-4 font-sans font-normal text-gray-900"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl leading-tight mb-2 sm:mb-3 md:mb-4 font-sans font-normal text-gray-900"
               style={{ lineHeight: "1.3" }}
             >
               {headingText.split(" ").map((word, index) => {
@@ -169,22 +171,22 @@ function HeroSection() {
                 <span className="animate-pulse text-gray-600">|</span>
               )}
             </h1>
-            <p className="text-xs sm:text-sm md:text-base text-gray-800 max-w-full sm:max-w-xl md:max-w-2xl leading-relaxed">
+            <p className="text-[11px] sm:text-xs md:text-sm lg:text-base text-gray-800 max-w-full sm:max-w-xl md:max-w-2xl leading-relaxed">
               At Technoweb, we transform your ideas into powerful digital solutions. From websites and apps to custom software and automation tools, we help businesses grow smarter and faster.
             </p>
           </div>
 
           {/* Scroll Down Button with Animation */}
-          <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
             <div
               className="flex items-center justify-center cursor-pointer group"
               onClick={handleScrollDown}
             >
-              <span className="text-xs sm:text-sm font-medium tracking-wider text-gray-800 uppercase mr-2">
+              <span className="text-[10px] sm:text-xs md:text-sm font-medium tracking-wider text-gray-800 uppercase mr-1.5 sm:mr-2">
                 SCROLL DOWN
               </span>
               <div className="animate-bounce-slow">
-                <div className="w-0 h-0 border-l-[4px] border-r-[4px] border-t-[6px] border-l-transparent border-r-transparent border-t-blue-600 group-hover:border-t-blue-700 transition-colors duration-900"></div>
+                <div className="w-0 h-0 border-l-[3px] sm:border-l-[4px] border-r-[3px] sm:border-r-[4px] border-t-[5px] sm:border-t-[6px] border-l-transparent border-r-transparent border-t-blue-600 group-hover:border-t-blue-700 transition-colors duration-900"></div>
               </div>
             </div>
           </div>
