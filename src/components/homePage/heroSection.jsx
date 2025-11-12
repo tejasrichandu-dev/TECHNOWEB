@@ -26,7 +26,7 @@ function HeroSection() {
   // Typewriter effect - faster on mobile
   useEffect(() => {
     let index = 0;
-    const typingSpeed = isMobile ? 30 : 50; // Faster typing on mobile
+    const typingSpeed = isMobile ? 30 : 50;
     
     const timer = setInterval(() => {
       if (index < fullHeading.length) {
@@ -43,7 +43,7 @@ function HeroSection() {
   // Scroll handling - disable transition on mobile
   useEffect(() => {
     const handleScroll = () => {
-      if (isMobile) return; // No transition on mobile
+      if (isMobile) return;
       
       const scrollThreshold = 100;
       setIsTransitioning(window.scrollY > scrollThreshold);
@@ -82,10 +82,9 @@ function HeroSection() {
     }
   };
 
-  // Mobile-optimized content structure
   return (
     <>
-      {/* Hero Section - Fixed on desktop, static on mobile */}
+      {/* Hero Section */}
       <div
         ref={heroRef}
         className={`${
@@ -100,7 +99,7 @@ function HeroSection() {
           id="home"
           className="relative h-full flex flex-col justify-center items-start overflow-hidden bg-transparent"
         >
-          {/* Video Background - Optimized for mobile */}
+          {/* Video Background */}
           <div
             className="absolute inset-0 w-full h-full overflow-hidden cursor-pointer"
             onClick={toggleVideoPlayPause}
@@ -114,7 +113,6 @@ function HeroSection() {
               preload="auto"
               onLoadedData={handleVideoLoad}
               className="w-full h-full object-cover"
-              poster="/video-poster.jpg" // Add a poster for better mobile performance
             >
               <source src="/Landing Video Technoweb.mp4" type="video/mp4" />
               Your browser does not support the video tag.
@@ -124,7 +122,7 @@ function HeroSection() {
               <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200" />
             )}
 
-            {/* Play/Pause Icon - Smaller on mobile */}
+            {/* Play/Pause Icon */}
             <div
               className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${
                 isVideoPaused ? "opacity-100" : "opacity-0"
@@ -167,30 +165,30 @@ function HeroSection() {
               </div>
             </div>
 
-            {/* Enhanced overlays for better text readability on mobile */}
+            {/* Enhanced overlays */}
             <div className="absolute inset-0 bg-white/40 pointer-events-none"></div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/30 pointer-events-none"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-white/10 pointer-events-none"></div>
           </div>
 
-          {/* Main Content - Completely redesigned for mobile */}
+          {/* Main Content */}
           <div className={`relative z-10 w-full ${
             isMobile 
               ? "px-4 mt-16 mb-20" 
               : "max-w-3xl px-4 sm:px-6 md:px-10 mt-12 sm:mt-16 md:mt-20 lg:mt-0"
           } pointer-events-none`}>
-            {/* Badge - Better mobile sizing */}
+            {/* Badge */}
             <span className={`inline-block px-3 py-1.5 mb-3 sm:mb-4 text-blue-600 border border-blue-600 rounded-full bg-white/80 backdrop-blur-sm pointer-events-auto ${
               isMobile ? "text-xs font-medium" : "text-xs sm:text-sm md:text-base"
             }`}>
               Innovate. Build. Excel.
             </span>
 
-            {/* Heading - Mobile optimized typography */}
+            {/* Heading */}
             <h1
               className={`font-sans font-normal text-gray-900 leading-tight mb-3 sm:mb-4 ${
                 isMobile
-                  ? "text-2xl leading-8" // Larger text on mobile for better readability
+                  ? "text-2xl leading-8"
                   : "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
               }`}
             >
@@ -214,16 +212,16 @@ function HeroSection() {
               )}
             </h1>
 
-            {/* Description - Better mobile text */}
+            {/* Description */}
             <p className={`text-gray-800 leading-relaxed ${
               isMobile
-                ? "text-sm leading-6 max-w-full" // Better line height on mobile
+                ? "text-sm leading-6 max-w-full"
                 : "text-xs sm:text-sm md:text-base max-w-full sm:max-w-xl md:max-w-2xl"
             }`}>
               At Technoweb, we transform your ideas into powerful digital solutions. From websites and apps to custom software and automation tools, we help businesses grow smarter and faster.
             </p>
 
-            {/* CTA Button for mobile - More prominent */}
+            {/* CTA Button for mobile */}
             {isMobile && (
               <div className="mt-6 pointer-events-auto">
                 <button
@@ -236,7 +234,7 @@ function HeroSection() {
             )}
           </div>
 
-          {/* Scroll Down Button - Enhanced for mobile */}
+          {/* Scroll Down Button - Desktop */}
           {!isMobile && (
             <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
               <div
@@ -279,6 +277,9 @@ function HeroSection() {
         </section>
       </div>
 
+      {/* Spacer for content below */}
+      <div className="relative" style={{ height: "100vh" }} />
+
       <style jsx>{`
         @keyframes bounce-slow {
           0%,
@@ -293,7 +294,6 @@ function HeroSection() {
           animation: bounce-slow 2s ease-in-out infinite;
         }
         
-        /* Better touch targets for mobile */
         @media (max-width: 768px) {
           button, [role="button"] {
             min-height: 44px;
