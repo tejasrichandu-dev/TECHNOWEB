@@ -31,7 +31,7 @@ const Details = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#323235] text-white p-6 md:p-12 font-sans">
+    <div className="min-h-screen bg-[#323235] text-white p-6 md:p-12 font-sans pt-100 md:pt-100">
       <div className="max-w-7xl mx-auto grid gap-6 md:grid-cols-2">
         {/* Global Reach and Project Success */}
         <Card
