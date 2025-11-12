@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Contact from '../../components/aboutUs/contact';
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Website');
+  const [visibleProjects, setVisibleProjects] = useState([]);
+  const projectsRef = useRef(null);
   const filters = ['Website']; 
   const projects = [
     { id: 1, image: 'https://picsum.photos/400/800?random=1', category: 'Website' },
@@ -25,6 +27,59 @@ export default function Projects() {
   // Always show all projects, regardless of filter
   const filteredProjects = projects;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!projectsRef.current) return;
+
+      const projectsSection = projectsRef.current;
+      const sectionTop = projectsSection.offsetTop;
+      const sectionHeight = projectsSection.offsetHeight;
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Calculate how far we've scrolled into the projects section
+      const scrollProgress = (scrollY - sectionTop + windowHeight * 0.5) / (sectionHeight * 0.5);
+      
+      // Determine if we're scrolling up or down
+      const isScrollingDown = scrollY > (window.lastScrollY || 0);
+      window.lastScrollY = scrollY;
+
+      // Calculate which projects should be visible based on scroll position
+      const totalProjects = filteredProjects.length;
+      const projectsPerRow = 4; // Based on your grid-cols-4
+      const totalRows = Math.ceil(totalProjects / projectsPerRow);
+      
+      const visibleRow = Math.floor(scrollProgress * totalRows);
+      
+      const newVisibleProjects = [];
+      
+      filteredProjects.forEach((project, index) => {
+        const row = Math.floor(index / projectsPerRow);
+        
+        if (isScrollingDown) {
+          // Grow in animation when scrolling down
+          if (row <= visibleRow) {
+            newVisibleProjects.push(project.id);
+          }
+        } else {
+          // Grow out animation when scrolling up
+          if (row >= visibleRow) {
+            newVisibleProjects.push(project.id);
+          }
+        }
+      });
+
+      setVisibleProjects(newVisibleProjects);
+    };
+
+    // Initialize with first row visible
+    const initialVisible = filteredProjects.slice(0, 4).map(p => p.id);
+    setVisibleProjects(initialVisible);
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [filteredProjects]);
+
   return (
     <div className="min-h-screen bg-white">
       <style>{`
@@ -35,9 +90,46 @@ export default function Projects() {
         .project-card:hover .scroll-image {
           transform: translateY(calc(-100% + 320px));
         }
+        
+        .grow-in {
+          animation: growIn 0.6s ease-out forwards;
+          transform-origin: center;
+        }
+        
+        .grow-out {
+          animation: growOut 0.6s ease-in forwards;
+          transform-origin: center;
+        }
+        
+        @keyframes growIn {
+          0% {
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+        
+        @keyframes growOut {
+          0% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+          100% {
+            opacity: 0;
+            transform: scale(0.8) translateY(-20px);
+          }
+        }
+        
+        .project-item {
+          transition: all 0.6s ease;
+        }
       `}</style>
+      
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-24">
+      <main ref={projectsRef} className="max-w-7xl mx-auto px-4 py-24">
         {/* Title Section - Split Layout */}
         <div className="mb-8 flex flex-col md:flex-row md:justify-between md:items-start gap-8">
           <div className="md:w-1/3 md:pl-8">
@@ -55,6 +147,7 @@ export default function Projects() {
             </p>
           </div>
         </div>
+        
         {/* Filter Buttons */}
         <div className="flex gap-3 mb-8 flex-wrap justify-center">
           {filters.map((filter) => (
@@ -71,12 +164,18 @@ export default function Projects() {
             </button>
           ))}
         </div>
+        
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="project-card group cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-xl transition-all duration-300"
+              className={`project-item project-card group cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 ${
+                visibleProjects.includes(project.id) ? 'grow-in' : 'grow-out'
+              }`}
+              style={{
+                display: visibleProjects.includes(project.id) ? 'block' : 'none'
+              }}
             >
               <div className="relative overflow-hidden bg-gray-100 h-80">
                 <img
@@ -89,10 +188,9 @@ export default function Projects() {
           ))}
         </div>
       </main>
-     {/* Contact Section */}
+     
+      {/* Contact Section */}
       <Contact />
     </div>
   );
 }
-
-
