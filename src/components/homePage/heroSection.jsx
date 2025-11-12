@@ -176,7 +176,7 @@ function HeroSection() {
             </p>
           </div>
 
-          Scroll Down Button with Animation
+          {/* Scroll Down Button with Animation */}
           <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
             <div
               className="flex items-center justify-center cursor-pointer group"
