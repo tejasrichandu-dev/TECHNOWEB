@@ -67,12 +67,12 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50">
       {/* Call to Action Section */}
-      <div ref={ref} className="bg-[#232325] rounded-3xl mx-6 mb-8">
-        <div className="max-w-6xl mx-auto px-8 py-12">
+      <div ref={ref} className="bg-[#232325] rounded-3xl mx-6 my-6">
+        <div className="max-w-6xl mx-auto px-10 py-11">
           {/* Top Section */}
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 mb-8">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 mb-6">
             {/* Left Content */}
             <div className="lg:flex-1">
               <motion.div
@@ -96,7 +96,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-4xl lg:text-5xl font-bold text-[#3B82F6]"
+                className="text-3xl lg:text-4xl font-bold text-[#3B82F6]"
               >
                 <Typewriter text="Got a project?" speed={50} />
               </motion.h2>
@@ -106,7 +106,7 @@ const Contact = () => {
             <div className="lg:flex lg:items-center lg:ml-auto w-full lg:w-auto">
               <div className="flex items-center w-full lg:w-auto">
                 <motion.button
-                  className="group bg-[#3B82F6] text-white px-8 py-4 rounded-lg font-semibold text-lg flex items-center gap-3"
+                  className="group bg-[#3B82F6] text-white px-6 py-3 rounded-lg font-semibold text-base flex items-center gap-3"
                   onHoverStart={() => setButtonHovered(true)}
                   onHoverEnd={() => setButtonHovered(false)}
                   onClick={() => setShowPopup(true)}
@@ -135,12 +135,12 @@ const Contact = () => {
             initial={{ width: 0 }}
             animate={lineControls}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="h-px bg-gray-600 mb-6"
+            className="h-px bg-gray-600 mb-4"
           />
 
           {/* Paragraph Section - Typewriter Animation */}
           <div>
-            <p className="text-gray-300 text-lg leading-relaxed max-w-3xl">
+            <p className="text-gray-300 text-base leading-relaxed max-w-3xl">
               <Typewriter text={paragraphText} speed={20} />
             </p>
           </div>
