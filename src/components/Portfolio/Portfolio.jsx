@@ -3,7 +3,7 @@ import Contact from '../../components/aboutUs/contact';
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Website');
-  const [visibleProjects, setVisibleProjects] = useState([]);
+  const [animatedProjects, setAnimatedProjects] = useState([]);
   const projectsRef = useRef(null);
   const filters = ['Website']; 
   const projects = [
@@ -38,47 +38,73 @@ export default function Projects() {
       const windowHeight = window.innerHeight;
 
       // Calculate how far we've scrolled into the projects section
-      const scrollProgress = (scrollY - sectionTop + windowHeight * 0.5) / (sectionHeight * 0.5);
+      const scrollProgress = (scrollY - sectionTop + windowHeight * 0.3) / (sectionHeight * 0.7);
       
       // Determine if we're scrolling up or down
       const isScrollingDown = scrollY > (window.lastScrollY || 0);
       window.lastScrollY = scrollY;
 
-      // Calculate which projects should be visible based on scroll position
+      // Calculate which projects should have animation based on scroll position
       const totalProjects = filteredProjects.length;
-      const projectsPerRow = 4; // Based on your grid-cols-4
+      const projectsPerRow = 4;
       const totalRows = Math.ceil(totalProjects / projectsPerRow);
       
-      const visibleRow = Math.floor(scrollProgress * totalRows);
+      const visibleRow = Math.min(Math.floor(scrollProgress * totalRows), totalRows - 1);
       
-      const newVisibleProjects = [];
+      const newAnimatedProjects = [];
       
       filteredProjects.forEach((project, index) => {
         const row = Math.floor(index / projectsPerRow);
         
         if (isScrollingDown) {
-          // Grow in animation when scrolling down
+          // Grow in animation when scrolling down - animate rows that come into view
           if (row <= visibleRow) {
-            newVisibleProjects.push(project.id);
+            newAnimatedProjects.push({
+              id: project.id,
+              animation: 'grow-in'
+            });
+          } else {
+            newAnimatedProjects.push({
+              id: project.id,
+              animation: ''
+            });
           }
         } else {
-          // Grow out animation when scrolling up
+          // Grow out animation when scrolling up - animate rows that go out of view
           if (row >= visibleRow) {
-            newVisibleProjects.push(project.id);
+            newAnimatedProjects.push({
+              id: project.id,
+              animation: 'grow-out'
+            });
+          } else {
+            newAnimatedProjects.push({
+              id: project.id,
+              animation: 'grow-in'
+            });
           }
         }
       });
 
-      setVisibleProjects(newVisibleProjects);
+      setAnimatedProjects(newAnimatedProjects);
     };
 
-    // Initialize with first row visible
-    const initialVisible = filteredProjects.slice(0, 4).map(p => p.id);
-    setVisibleProjects(initialVisible);
+    // Initialize with all cards visible but no animation
+    const initialAnimation = filteredProjects.map(project => ({
+      id: project.id,
+      animation: ''
+    }));
+    setAnimatedProjects(initialAnimation);
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Trigger once on mount
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, [filteredProjects]);
+
+  const getAnimationClass = (projectId) => {
+    const project = animatedProjects.find(p => p.id === projectId);
+    return project ? project.animation : '';
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -92,19 +118,23 @@ export default function Projects() {
         }
         
         .grow-in {
-          animation: growIn 0.6s ease-out forwards;
+          animation: growIn 0.8s ease-out forwards;
           transform-origin: center;
         }
         
         .grow-out {
-          animation: growOut 0.6s ease-in forwards;
+          animation: growOut 0.8s ease-in forwards;
           transform-origin: center;
         }
         
         @keyframes growIn {
           0% {
             opacity: 0;
-            transform: scale(0.8) translateY(20px);
+            transform: scale(0.8) translateY(30px);
+          }
+          70% {
+            opacity: 0.7;
+            transform: scale(1.02) translateY(5px);
           }
           100% {
             opacity: 1;
@@ -117,14 +147,20 @@ export default function Projects() {
             opacity: 1;
             transform: scale(1) translateY(0);
           }
+          30% {
+            opacity: 0.7;
+            transform: scale(1.02) translateY(5px);
+          }
           100% {
             opacity: 0;
-            transform: scale(0.8) translateY(-20px);
+            transform: scale(0.8) translateY(-30px);
           }
         }
         
         .project-item {
-          transition: all 0.6s ease;
+          transition: all 0.8s ease;
+          opacity: 1;
+          transform: scale(1);
         }
       `}</style>
       
@@ -165,17 +201,12 @@ export default function Projects() {
           ))}
         </div>
         
-        {/* Projects Grid */}
+        {/* Projects Grid - All cards always visible */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className={`project-item project-card group cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 ${
-                visibleProjects.includes(project.id) ? 'grow-in' : 'grow-out'
-              }`}
-              style={{
-                display: visibleProjects.includes(project.id) ? 'block' : 'none'
-              }}
+              className={`project-item project-card group cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 ${getAnimationClass(project.id)}`}
             >
               <div className="relative overflow-hidden bg-gray-100 h-80">
                 <img
