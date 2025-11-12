@@ -3,7 +3,7 @@ import Contact from '../../components/aboutUs/contact';
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('Website');
-  const [animatedProjects, setAnimatedProjects] = useState([]);
+  const [animatedRows, setAnimatedRows] = useState(new Set());
   const projectsRef = useRef(null);
   const filters = ['Website']; 
   const projects = [
@@ -24,12 +24,19 @@ export default function Projects() {
     { id: 15, image: 'https://picsum.photos/400/800?random=15', category: 'Mobile Application' },
   ];
 
-  // Always show all projects, regardless of filter
   const filteredProjects = projects;
+  const projectsPerRow = 4;
+  const totalRows = Math.ceil(filteredProjects.length / projectsPerRow);
 
   useEffect(() => {
+    let scrollTimeout;
+    let lastScrollY = window.scrollY;
+    let isScrolling = false;
+
     const handleScroll = () => {
-      if (!projectsRef.current) return;
+      if (!projectsRef.current || isScrolling) return;
+
+      isScrolling = true;
 
       const projectsSection = projectsRef.current;
       const sectionTop = projectsSection.offsetTop;
@@ -37,73 +44,77 @@ export default function Projects() {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
 
-      // Calculate how far we've scrolled into the projects section
-      const scrollProgress = (scrollY - sectionTop + windowHeight * 0.3) / (sectionHeight * 0.7);
-      
-      // Determine if we're scrolling up or down
-      const isScrollingDown = scrollY > (window.lastScrollY || 0);
-      window.lastScrollY = scrollY;
+      // Calculate current visible row based on scroll position
+      const scrollProgress = (scrollY - sectionTop + windowHeight * 0.3) / sectionHeight;
+      const currentRow = Math.floor(scrollProgress * totalRows);
+      const clampedRow = Math.max(0, Math.min(currentRow, totalRows - 1));
 
-      // Calculate which projects should have animation based on scroll position
-      const totalProjects = filteredProjects.length;
-      const projectsPerRow = 4;
-      const totalRows = Math.ceil(totalProjects / projectsPerRow);
-      
-      const visibleRow = Math.min(Math.floor(scrollProgress * totalRows), totalRows - 1);
-      
-      const newAnimatedProjects = [];
-      
-      filteredProjects.forEach((project, index) => {
-        const row = Math.floor(index / projectsPerRow);
-        
+      const isScrollingDown = scrollY > lastScrollY;
+      lastScrollY = scrollY;
+
+      setAnimatedRows(prev => {
+        const newAnimatedRows = new Set(prev);
+
         if (isScrollingDown) {
-          // Grow in animation when scrolling down - animate rows that come into view
-          if (row <= visibleRow) {
-            newAnimatedProjects.push({
-              id: project.id,
-              animation: 'grow-in'
-            });
-          } else {
-            newAnimatedProjects.push({
-              id: project.id,
-              animation: ''
-            });
+          // Scrolling down - grow in rows from top to bottom
+          for (let row = 0; row <= clampedRow; row++) {
+            newAnimatedRows.add(row);
+          }
+          // Remove grow-out classes when scrolling down
+          for (let row = clampedRow + 1; row < totalRows; row++) {
+            newAnimatedRows.delete(`out-${row}`);
           }
         } else {
-          // Grow out animation when scrolling up - animate rows that go out of view
-          if (row >= visibleRow) {
-            newAnimatedProjects.push({
-              id: project.id,
-              animation: 'grow-out'
-            });
-          } else {
-            newAnimatedProjects.push({
-              id: project.id,
-              animation: 'grow-in'
-            });
+          // Scrolling up - grow out rows from bottom to top
+          for (let row = totalRows - 1; row > clampedRow; row--) {
+            newAnimatedRows.add(`out-${row}`);
+            newAnimatedRows.delete(row);
+          }
+          // Ensure rows above current row have grow-in
+          for (let row = 0; row <= clampedRow; row++) {
+            newAnimatedRows.add(row);
+            newAnimatedRows.delete(`out-${row}`);
           }
         }
+
+        return newAnimatedRows;
       });
 
-      setAnimatedProjects(newAnimatedProjects);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 50);
     };
 
-    // Initialize with all cards visible but no animation
-    const initialAnimation = filteredProjects.map(project => ({
-      id: project.id,
-      animation: ''
-    }));
-    setAnimatedProjects(initialAnimation);
+    // Initialize with first row animated
+    setAnimatedRows(new Set([0]));
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Trigger once on mount
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [filteredProjects]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, [filteredProjects.length, totalRows]);
 
   const getAnimationClass = (projectId) => {
-    const project = animatedProjects.find(p => p.id === projectId);
-    return project ? project.animation : '';
+    const projectIndex = filteredProjects.findIndex(p => p.id === projectId);
+    const row = Math.floor(projectIndex / projectsPerRow);
+    
+    if (animatedRows.has(row)) {
+      return 'grow-in';
+    } else if (animatedRows.has(`out-${row}`)) {
+      return 'grow-out';
+    }
+    return '';
+  };
+
+  const isRowVisible = (projectId) => {
+    const projectIndex = filteredProjects.findIndex(p => p.id === projectId);
+    const row = Math.floor(projectIndex / projectsPerRow);
+    
+    // Always show all cards, but control visibility through opacity
+    return true;
   };
 
   return (
@@ -118,12 +129,12 @@ export default function Projects() {
         }
         
         .grow-in {
-          animation: growIn 0.8s ease-out forwards;
+          animation: growIn 0.6s ease-out forwards;
           transform-origin: center;
         }
         
         .grow-out {
-          animation: growOut 0.8s ease-in forwards;
+          animation: growOut 0.6s ease-in forwards;
           transform-origin: center;
         }
         
@@ -131,10 +142,6 @@ export default function Projects() {
           0% {
             opacity: 0;
             transform: scale(0.8) translateY(30px);
-          }
-          70% {
-            opacity: 0.7;
-            transform: scale(1.02) translateY(5px);
           }
           100% {
             opacity: 1;
@@ -147,10 +154,6 @@ export default function Projects() {
             opacity: 1;
             transform: scale(1) translateY(0);
           }
-          30% {
-            opacity: 0.7;
-            transform: scale(1.02) translateY(5px);
-          }
           100% {
             opacity: 0;
             transform: scale(0.8) translateY(-30px);
@@ -158,9 +161,13 @@ export default function Projects() {
         }
         
         .project-item {
-          transition: all 0.8s ease;
-          opacity: 1;
-          transform: scale(1);
+          transition: all 0.6s ease;
+        }
+
+        /* Ensure all cards are always in layout but animated ones are visible */
+        .project-item:not(.grow-in):not(.grow-out) {
+          opacity: 0;
+          transform: scale(0.8);
         }
       `}</style>
       
@@ -201,7 +208,7 @@ export default function Projects() {
           ))}
         </div>
         
-        {/* Projects Grid - All cards always visible */}
+        {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProjects.map((project) => (
             <div
