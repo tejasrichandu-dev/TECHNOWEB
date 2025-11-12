@@ -26,7 +26,7 @@ function HeroSection() {
   // Typewriter effect - faster on mobile
   useEffect(() => {
     let index = 0;
-    const typingSpeed = isMobile ? 30 : 50; // Faster typing on mobile
+    const typingSpeed = isMobile ? 30 : 50;
     
     const timer = setInterval(() => {
       if (index < fullHeading.length) {
@@ -43,7 +43,7 @@ function HeroSection() {
   // Scroll handling - disable transition on mobile
   useEffect(() => {
     const handleScroll = () => {
-      if (isMobile) return; // No transition on mobile
+      if (isMobile) return;
       
       const scrollThreshold = 100;
       setIsTransitioning(window.scrollY > scrollThreshold);
@@ -82,27 +82,43 @@ function HeroSection() {
     }
   };
 
-  // Mobile-optimized content structure
   return (
     <>
-      {/* Hero Section - Fixed on desktop, static on mobile */}
+      {/* Hero Section - Fixed layout with overflow hidden */}
       <div
         ref={heroRef}
         className={`${
           isMobile ? "relative" : "fixed top-0 left-0"
-        } w-full h-screen z-40 ${
+        } w-full h-screen z-40 overflow-hidden ${
           !isMobile && "transition-transform duration-1100 ease-in-out"
         } ${
           !isMobile && (isTransitioning ? "-translate-y-full" : "translate-y-0")
         }`}
+        style={{
+          width: '100vw',
+          left: 0,
+          right: 0,
+          margin: 0,
+          padding: 0
+        }}
       >
         <section
           id="home"
           className="relative h-full flex flex-col justify-center items-start overflow-hidden bg-transparent"
+          style={{
+            width: '100%',
+            margin: 0,
+            padding: 0
+          }}
         >
-          {/* Video Background - Optimized for mobile */}
+          {/* Video Background - Full width with no overflow */}
           <div
             className="absolute inset-0 w-full h-full overflow-hidden cursor-pointer"
+            style={{
+              width: '100vw',
+              left: 0,
+              right: 0
+            }}
             onClick={toggleVideoPlayPause}
           >
             <video
@@ -114,22 +130,30 @@ function HeroSection() {
               preload="auto"
               onLoadedData={handleVideoLoad}
               className="w-full h-full object-cover"
-              poster="/video-poster.jpg" // Add a poster for better mobile performance
+              style={{
+                minWidth: '100%',
+                minHeight: '100%',
+                width: 'auto',
+                height: 'auto'
+              }}
+              poster="/video-poster.jpg"
             >
               <source src="/Landing Video Technoweb.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             
             {!videoLoaded && (
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200" />
+              <div 
+                className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200"
+                style={{ width: '100vw' }}
+              />
             )}
 
-            {/* Play/Pause Icon - Smaller on mobile */}
+            {/* Play/Pause Icon - Moved to left */}
             <div
-              className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${
+              className={`absolute top-4 left-4 flex items-center justify-center transition-opacity duration-200 z-30 ${
                 isVideoPaused ? "opacity-100" : "opacity-0"
               }`}
-              style={{ marginTop: isMobile ? "10%" : "5%" }}
             >
               <div className={`bg-black/60 rounded-full backdrop-blur-sm ${
                 isMobile ? "p-1.5" : "p-2 sm:p-2.5 md:p-3"
@@ -167,30 +191,30 @@ function HeroSection() {
               </div>
             </div>
 
-            {/* Enhanced overlays for better text readability on mobile */}
+            {/* Enhanced overlays */}
             <div className="absolute inset-0 bg-white/40 pointer-events-none"></div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/30 pointer-events-none"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-white/10 pointer-events-none"></div>
           </div>
 
-          {/* Main Content - Completely redesigned for mobile */}
+          {/* Main Content */}
           <div className={`relative z-10 w-full ${
             isMobile 
               ? "px-4 mt-16 mb-20" 
               : "max-w-3xl px-4 sm:px-6 md:px-10 mt-12 sm:mt-16 md:mt-20 lg:mt-0"
           } pointer-events-none`}>
-            {/* Badge - Better mobile sizing */}
+            {/* Badge */}
             <span className={`inline-block px-3 py-1.5 mb-3 sm:mb-4 text-blue-600 border border-blue-600 rounded-full bg-white/80 backdrop-blur-sm pointer-events-auto ${
               isMobile ? "text-xs font-medium" : "text-xs sm:text-sm md:text-base"
             }`}>
               Innovate. Build. Excel.
             </span>
 
-            {/* Heading - Mobile optimized typography */}
+            {/* Heading */}
             <h1
               className={`font-sans font-normal text-gray-900 leading-tight mb-3 sm:mb-4 ${
                 isMobile
-                  ? "text-2xl leading-8" // Larger text on mobile for better readability
+                  ? "text-2xl leading-8"
                   : "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
               }`}
             >
@@ -214,16 +238,16 @@ function HeroSection() {
               )}
             </h1>
 
-            {/* Description - Better mobile text */}
+            {/* Description */}
             <p className={`text-gray-800 leading-relaxed ${
               isMobile
-                ? "text-sm leading-6 max-w-full" // Better line height on mobile
+                ? "text-sm leading-6 max-w-full"
                 : "text-xs sm:text-sm md:text-base max-w-full sm:max-w-xl md:max-w-2xl"
             }`}>
               At Technoweb, we transform your ideas into powerful digital solutions. From websites and apps to custom software and automation tools, we help businesses grow smarter and faster.
             </p>
 
-            {/* CTA Button for mobile - More prominent */}
+            {/* CTA Button for mobile */}
             {isMobile && (
               <div className="mt-6 pointer-events-auto">
                 <button
@@ -236,7 +260,7 @@ function HeroSection() {
             )}
           </div>
 
-          {/* Scroll Down Button - Enhanced for mobile */}
+          {/* Scroll Down Button - Desktop */}
           {!isMobile && (
             <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
               <div
@@ -279,7 +303,20 @@ function HeroSection() {
         </section>
       </div>
 
-      <style jsx>{`
+      {/* Global styles to prevent white space on right side */}
+      <style jsx global>{`
+        html, body {
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+          width: 100%;
+          max-width: 100vw;
+        }
+        
+        body {
+          position: relative;
+        }
+        
         @keyframes bounce-slow {
           0%,
           100% {
@@ -299,6 +336,11 @@ function HeroSection() {
             min-height: 44px;
             min-width: 44px;
           }
+        }
+        
+        /* Ensure no horizontal scroll */
+        * {
+          box-sizing: border-box;
         }
       `}</style>
     </>
