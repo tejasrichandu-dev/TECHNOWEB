@@ -89,36 +89,19 @@ function HeroSection() {
         ref={heroRef}
         className={`${
           isMobile ? "relative" : "fixed top-0 left-0"
-        } w-full h-screen z-40 overflow-hidden ${
+        } w-full h-screen z-40 overflow-x-hidden ${
           !isMobile && "transition-transform duration-1100 ease-in-out"
         } ${
           !isMobile && (isTransitioning ? "-translate-y-full" : "translate-y-0")
         }`}
-        style={{
-          width: '100vw',
-          left: 0,
-          right: 0,
-          margin: 0,
-          padding: 0
-        }}
       >
         <section
           id="home"
           className="relative h-full flex flex-col justify-center items-start overflow-hidden bg-transparent"
-          style={{
-            width: '100%',
-            margin: 0,
-            padding: 0
-          }}
         >
           {/* Video Background - Full width with no overflow */}
           <div
             className="absolute inset-0 w-full h-full overflow-hidden cursor-pointer"
-            style={{
-              width: '100vw',
-              left: 0,
-              right: 0
-            }}
             onClick={toggleVideoPlayPause}
           >
             <video
@@ -129,13 +112,7 @@ function HeroSection() {
               playsInline
               preload="auto"
               onLoadedData={handleVideoLoad}
-              className="w-full h-full object-cover"
-              style={{
-                minWidth: '100%',
-                minHeight: '100%',
-                width: 'auto',
-                height: 'auto'
-              }}
+              className="w-full h-full object-cover min-w-full min-h-full"
               poster="/video-poster.jpg"
             >
               <source src="/Landing Video Technoweb.mp4" type="video/mp4" />
@@ -143,15 +120,12 @@ function HeroSection() {
             </video>
             
             {!videoLoaded && (
-              <div 
-                className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200"
-                style={{ width: '100vw' }}
-              />
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200" />
             )}
 
-            {/* Play/Pause Icon - Moved to left */}
+            {/* Play/Pause Icon - Moved to left side */}
             <div
-              className={`absolute top-4 left-4 flex items-center justify-center transition-opacity duration-200 z-30 ${
+              className={`absolute top-6 left-6 flex items-center justify-center transition-opacity duration-200 z-30 ${
                 isVideoPaused ? "opacity-100" : "opacity-0"
               }`}
             >
@@ -310,11 +284,10 @@ function HeroSection() {
           padding: 0;
           overflow-x: hidden;
           width: 100%;
-          max-width: 100vw;
         }
         
-        body {
-          position: relative;
+        #__next {
+          overflow-x: hidden;
         }
         
         @keyframes bounce-slow {
@@ -336,11 +309,6 @@ function HeroSection() {
             min-height: 44px;
             min-width: 44px;
           }
-        }
-        
-        /* Ensure no horizontal scroll */
-        * {
-          box-sizing: border-box;
         }
       `}</style>
     </>
