@@ -1,0 +1,396 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowLeft, Calendar, User, Share2, X } from "lucide-react";
+
+const Blog4 = () => {
+  const navigate = useNavigate();
+  const [showContactPopup, setShowContactPopup] = useState(false);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Why Every Business Needs a Strong Digital Marketing Strategy in 2025",
+          text: "Learn how digital marketing can help businesses connect with customers, stand out in crowded markets, and drive measurable results.",
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.log("Share cancelled");
+      }
+    } else {
+      alert("Sharing this article");
+    }
+  };
+
+  const latestBlogs = [
+    {
+      id: 1,
+      title: "How Custom ERP Solutions Can Streamline Your Business Operations",
+      date: "July 11, 2025",
+      category: "ERP Solutions",
+      image: "/erp.jpeg",
+    },
+    {
+      id: 2,
+      title: "Digital Transformation for SMEs: Where to Start and How to Scale",
+      date: "January 12, 2025",
+      category: "Digital Transformation",
+      image: "/sme.jpeg",
+    },
+    {
+      id: 3,
+      title: "The Role of IT Consulting in Driving Business Growth",
+      date: "January 12, 2025",
+      category: "IT Consulting",
+      image: "/it consulting.jpeg",
+    },
+  ];
+
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      {/* Hero Section with Background Image and Gradient */}
+      <div className="relative h-screen max-h-[600px] bg-white flex items-end overflow-hidden pt-20">
+        {/* Background Image */}
+        <div className="absolute inset-0 top-20">
+          <img
+            src="/Dm.jpeg"
+            alt="Digital Marketing Strategy"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-gray-50"></div>
+        </div>
+        {/* Hero Content */}
+        <div className="relative max-w-6xl mx-auto px-6 pb-12 z-10 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <span className="bg-white/80 text-blue-600 px-4 py-1.5 rounded-full text-sm font-medium">
+                Digital Marketing
+              </span>
+              <span className="bg-white/80 text-blue-600 px-4 py-1.5 rounded-full text-sm font-medium">
+                Business Growth
+              </span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6 leading-tight text-center max-w-5xl mx-auto">
+              Why Every Business Needs a Strong Digital Marketing Strategy in 2025
+            </h1>
+            <div className="flex items-center justify-between max-w-5xl mx-auto">
+              <div className="flex items-center gap-3">
+                <Calendar size={20} className="text-gray-900" />
+                <span className="text-gray-900 text-base font-medium">
+                  January 10, 2025
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200">
+                  <img
+                    src="https://via.placeholder.com/48"
+                    alt="Maria Novak"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="text-left">
+                  <div className="text-gray-900 font-semibold text-base">
+                    Maria Novak
+                  </div>
+                  <div className="text-gray-700 text-sm">Digital Strategy Lead</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div className="max-w-4xl mx-auto px-5 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {/* Back Button and Share */}
+          <div className="flex items-center justify-between mb-8">
+            <button
+              onClick={() => navigate("/insights")}
+              className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors"
+            >
+              <ArrowLeft size={20} />
+              Back to Insights
+            </button>
+            <button
+              onClick={handleShare}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            >
+              <Share2 size={18} />
+              Share
+            </button>
+          </div>
+
+          {/* Article Content */}
+          <article className="prose prose-lg max-w-none">
+            {/* Introduction */}
+            <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                The digital landscape is evolving faster than ever before. With consumers spending more time online and competition growing across every industry, businesses can no longer rely on traditional marketing methods to capture attention. In 2025, a strong digital marketing strategy isn’t just a nice-to-have—it’s essential for survival and growth.
+              </p>
+              <p className="text-gray-700 leading-relaxed text-lg">
+                From search engine optimization (SEO) to paid ads, social media campaigns, and data-driven insights, digital marketing provides the tools businesses need to connect with customers, stand out in crowded markets, and drive measurable results.
+              </p>
+            </div>
+
+            {/* The Shift Toward a Digital-First Market */}
+            <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">The Shift Toward a Digital-First Market</h2>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                Consumer behavior has shifted dramatically. Before making a purchase, most customers research online, compare options, and read reviews. Whether it’s a small local shop or a multinational company, having a strong digital presence ensures your business is visible where your customers are looking.
+              </p>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                Key statistics show the urgency:
+              </p>
+              <ul className="list-disc pl-6 mb-6">
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Over 80% of consumers research products online before buying.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Mobile devices now account for more than half of global web traffic.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Businesses with active digital marketing strategies see significantly higher revenue growth compared to those without.</li>
+              </ul>
+            </div>
+
+            {/* Core Pillars of a Digital Marketing Strategy */}
+            <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Core Pillars of a Digital Marketing Strategy</h2>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">1. Search Engine Optimization (SEO)</h3>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                SEO remains the foundation of digital marketing. By optimizing your website’s structure, content, and keywords, you can rank higher on search engines and attract quality traffic. In 2025, SEO goes beyond keywords—it’s about creating valuable content, improving user experience, and meeting search intent.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">2. Content Marketing</h3>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                High-quality blogs, videos, infographics, and case studies not only build trust but also establish your brand as an industry authority. Content marketing drives organic engagement and supports every other digital channel.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">3. Social Media Marketing</h3>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                With billions of users across platforms like Instagram, LinkedIn, and TikTok, social media is where conversations happen. Effective strategies build communities, increase brand awareness, and foster customer loyalty.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">4. Paid Advertising (PPC)</h3>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                Google Ads, Facebook Ads, and LinkedIn campaigns allow businesses to target specific audiences with precision. Paid ads provide immediate visibility, making them a critical complement to long-term organic strategies.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">5. Email Marketing & Automation</h3>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                Despite being one of the oldest digital channels, email remains highly effective. Personalized campaigns and automation tools help nurture leads and maintain strong customer relationships.
+              </p>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">6. Analytics & Data-Driven Insights</h3>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                Digital marketing is measurable. Analytics platforms allow businesses to track performance, identify trends, and make informed decisions to optimize campaigns continuously.
+              </p>
+            </div>
+
+            {/* Why Businesses Can’t Ignore Digital Marketing in 2025 */}
+            <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Businesses Can’t Ignore Digital Marketing in 2025</h2>
+              <ul className="list-disc pl-6 mb-6">
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Competition is Fierce – If your business isn’t online, your competitors are, and they’re capturing your potential customers.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Customer Expectations Are Higher – Customers expect fast responses, personalized experiences, and seamless digital interactions.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Cost-Effectiveness – Compared to traditional marketing, digital strategies offer better ROI, with more control over targeting and spend.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Global Reach with Local Precision – Whether you want to attract customers in your neighborhood or across the globe, digital marketing makes it possible.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Adaptability – Digital campaigns can be adjusted in real time, unlike static print or TV ads.</li>
+              </ul>
+            </div>
+
+            {/* Building a Strong Digital Marketing Strategy in 2025 */}
+            <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Building a Strong Digital Marketing Strategy in 2025</h2>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                To succeed, businesses should:
+              </p>
+              <ul className="list-disc pl-6 mb-6">
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Define Clear Goals – Whether it’s brand awareness, lead generation, or sales, set measurable objectives.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Know Your Audience – Use analytics and customer data to understand behaviors and preferences.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Balance Organic and Paid Channels – Combine SEO-driven content with targeted ad campaigns for maximum impact.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Focus on Mobile & Voice Search – With the rise of smartphones and AI assistants, optimizing for mobile and voice queries is critical.</li>
+                <li className="text-gray-700 leading-relaxed text-lg mb-2">Continuously Measure and Optimize – Monitor KPIs, refine campaigns, and stay agile in response to changing market trends.</li>
+              </ul>
+            </div>
+
+            {/* Final Thoughts */}
+            <div className="bg-white rounded-lg p-8 shadow-sm mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Final Thoughts</h2>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                In today’s digital-first world, businesses that fail to embrace digital marketing risk falling behind. A strong, well-executed strategy not only ensures visibility but also drives growth, builds customer trust, and secures long-term success.
+              </p>
+              <p className="text-gray-700 leading-relaxed text-lg mb-6">
+                At Technoweb, we specialize in crafting digital marketing strategies tailored to your industry, combining SEO, content, social media, and paid campaigns to deliver measurable results.
+              </p>
+            </div>
+
+            {/* Call to Action */}
+            <div className="bg-slate-900 rounded-xl p-8 text-center shadow-lg border border-blue-600">
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Not sure which digital solution is right for your business?
+              </h3>
+              <p className="text-gray-300 mb-6 text-lg">
+                Connect with Technoweb today, and our consultants will help you find the best solution to meet your business needs.
+              </p>
+              <button
+                onClick={() => setShowContactPopup(true)}
+                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Contact Us
+              </button>
+            </div>
+          </article>
+
+          {/* You Might Also Like - Latest 3 Blogs */}
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-xl font-bold text-gray-900 mb-6">You Might Also Like</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {latestBlogs.map((blog) => (
+                <div
+                  key={blog.id}
+                  onClick={() => navigate(`/blog/${blog.id}`)}
+                  className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                >
+                  <div className="h-48 overflow-hidden">
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <span className="text-blue-600 text-xs font-semibold">{blog.category}</span>
+                    <h4 className="text-gray-900 font-bold mt-2 mb-2 line-clamp-2">{blog.title}</h4>
+                    <p className="text-gray-600 text-sm">{blog.date}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Contact Popup Modal */}
+      {showContactPopup && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Header */}
+            <div className="sticky top-0 bg-white rounded-t-2xl p-6 pb-4 border-b border-gray-200">
+              <button
+                onClick={() => setShowContactPopup(false)}
+                className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X size={24} />
+              </button>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2 pr-8">
+                Let’s Find the Right Solution for Your Business
+              </h2>
+              <p className="text-gray-600">
+                Fill out the form below, and our experts will help you choose the right digital solution to grow your business efficiently.
+              </p>
+            </div>
+            {/* Body */}
+            <div className="p-6">
+              {/* Benefits List */}
+              <div className="mb-6 bg-blue-50 rounded-lg p-4">
+                <p className="font-semibold text-gray-900 mb-2">We can help you:</p>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2">•</span>
+                    <span>Identify the solution that fits your business goals</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2">•</span>
+                    <span>Plan a roadmap for implementation</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2">•</span>
+                    <span>Recommend scalable and cost-effective options</span>
+                  </li>
+                </ul>
+              </div>
+              {/* Form */}
+              <div className="space-y-5">
+                {/* Full Name */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter Your Name"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  />
+                </div>
+                {/* Email */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Enter Your Email"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  />
+                </div>
+                {/* Phone Number */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="Enter Your Number"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                  />
+                </div>
+                {/* Select Service */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Select Service
+                  </label>
+                  <select className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-gray-500">
+                    <option>Select</option>
+                    <option>Web Development</option>
+                    <option>Mobile App Development</option>
+                    <option>Custom ERP Solutions</option>
+                    <option>UI/UX Design</option>
+                    <option>Digital Marketing</option>
+                    <option>Cloud Solutions</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                {/* Message */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    placeholder="Enter Your Message"
+                    rows="4"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
+                  ></textarea>
+                </div>
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    alert('Request submitted successfully!');
+                    setShowContactPopup(false);
+                  }}
+                  className="w-full bg-blue-600 text-white rounded-lg py-3 font-semibold hover:bg-blue-700 transition-colors shadow-md"
+                >
+                  Submit Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Blog4;
