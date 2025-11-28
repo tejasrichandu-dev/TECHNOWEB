@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import NavBar from "./components/homePage/navBar";
 import HomePage from "./components/homePage/homePage";
 import AboutUs from "./components/aboutUs/aboutUs";
