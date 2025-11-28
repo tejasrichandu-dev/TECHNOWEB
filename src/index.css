@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+html {
+  overflow-x: clip;
+  width: 100%;
+}
+
+body {
+  overflow-x: clip;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
