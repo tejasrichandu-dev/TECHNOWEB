@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowRight } from "lucide-react";
 
 const NUM_RECTANGLES = 50;
-const ROTATABLE_CHANCE = 0.5;
+const ROTATABLE_CHANCE = 0.4;
 const SCROLL_SPEED_FACTOR = 0.6;
 
 const DarkHeroSection = () => {
@@ -44,7 +44,7 @@ const DarkHeroSection = () => {
     return Array.from({ length: NUM_RECTANGLES }).map((_, index) => {
       const isRotatable = blueIndicesRef.current[index];
       const rotationProgress = (scrollY % 1000) / 1000;
-      const rotation = isRotatable ? Math.sin(rotationProgress * Math.PI) * 70 : 0;
+      const rotation = isRotatable ? Math.sin(rotationProgress * Math.PI) * 90 : 0;
 
       return (
         <div
