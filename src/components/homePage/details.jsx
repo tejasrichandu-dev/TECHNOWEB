@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 // CountUp component for animating numbers
 const CountUp = ({ end, duration = 2000, suffix = "" }) => {
@@ -49,7 +50,7 @@ const CountUp = ({ end, duration = 2000, suffix = "" }) => {
 
 const Card = ({ title, content, children, className = "" }) => {
   return (
-    <div className={`bg-[#000000] p-8 rounded-xl shadow-lg ${className}`}>
+    <div className={`bg-[#000000] p-8 rounded-xl shadow-lg h-full ${className}`}>
       <h2 className="text-3xl font-semibold mb-4 text-[#0D84FB] font-poppins">{title}</h2>
       <p className="text-[#FFFFFF] font-regular font-poppins mb-6">{content}</p>
       {children}
@@ -192,7 +193,14 @@ const Details = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#323235] text-white p-6 md:p-12 font-sans pt-10 md:pt-100 lg:pt-50">
+    <motion.div
+      className="min-h-screen bg-[#323235] text-white p-6 md:p-12 font-sans pt-10 md:pt-100 lg:pt-50"
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -80 }}
+      transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <div className="max-w-7xl mx-auto grid gap-6 md:grid-cols-2">
         {/* Global Reach and Project Success - Slide from Left */}
         <div className="md:contents">
@@ -348,8 +356,9 @@ const Details = () => {
           `}</style>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 export default Details;
+
