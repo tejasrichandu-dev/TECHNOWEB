@@ -156,12 +156,12 @@ function HeroSection() {
 
           {/* Main Content - Mobile Optimized with Better Spacing */}
           <div className="relative z-10 w-full max-w-3xl px-4 sm:px-6 md:px-10 mt-12 sm:mt-16 md:mt-20 lg:mt-0 pointer-events-none">
-            <span className="inline-block px-2.5 py-1 mb-2 sm:mb-3 md:mb-4 text-blue-600 border border-blue-600 rounded-full text-[10px] sm:text-xs md:text-sm lg:text-base bg-white/80 backdrop-blur-sm pointer-events-auto">
+            <span className="inline-block px-2.5 py-1 mb-2 sm:mb-3 md:mb-4 text-blue-600 border border-blue-600 rounded-full text-xs sm:text-xs md:text-sm lg:text-base bg-white/80 backdrop-blur-sm pointer-events-auto">
               Innovate. Build. Excel.
             </span>
             <h1
-              className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl leading-tight mb-3 sm:mb-3 md:mb-4 font-sans font-normal text-gray-900"
-              style={{ lineHeight: "1.3" }}
+              className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl 2xl:text-7xl leading-tight mb-4 sm:mb-4 md:mb-5 font-sans font-normal text-gray-900"
+              style={{ lineHeight: "1.2" }}
             >
               {headingText.split(" ").map((word, index) => {
                 const isBlueWord = ["Websites,", "Apps", "&", "Software"].includes(word);
@@ -182,7 +182,7 @@ function HeroSection() {
                 <span className="animate-pulse text-gray-600">|</span>
               )}
             </h1>
-            <p className="text-sm sm:text-sm md:text-base lg:text-lg text-gray-800 max-w-full sm:max-w-xl md:max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-base md:text-lg lg:text-xl text-gray-800 max-w-full sm:max-w-xl md:max-w-2xl leading-relaxed">
               At Technoweb, we transform your ideas into powerful digital solutions. From websites and apps to custom software and automation tools, we help businesses grow smarter and faster.
             </p>
           </div>
@@ -193,7 +193,7 @@ function HeroSection() {
               className="flex items-center justify-center cursor-pointer group"
               onClick={handleScrollDown}
             >
-              <span className="text-[10px] sm:text-xs md:text-sm font-medium tracking-wider text-gray-800 uppercase mr-1.5 sm:mr-2">
+              <span className="text-xs sm:text-xs md:text-sm font-medium tracking-wider text-gray-800 uppercase mr-1.5 sm:mr-2">
                 SCROLL DOWN
               </span>
               <div className="animate-bounce-slow">
