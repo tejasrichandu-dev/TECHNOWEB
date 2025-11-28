@@ -44,7 +44,7 @@ const DarkHeroSection = () => {
     return Array.from({ length: NUM_RECTANGLES }).map((_, index) => {
       const isRotatable = blueIndicesRef.current[index];
       const rotationProgress = (scrollY % 1000) / 1000;
-      const rotation = isRotatable ? Math.sin(rotationProgress * Math.PI) * 90 : 0;
+      const rotation = isRotatable ? Math.sin(rotationProgress * Math.PI) * 70 : 0;
 
       return (
         <div
@@ -59,7 +59,7 @@ const DarkHeroSection = () => {
   };
 
   return (
-    <div className="heroContainer min-h-[700vh]">
+    <div className="heroContainer min-h-[900vh]">
       {/* Background Rectangles */}
       <div className="rectanglesContainer">
         <div
