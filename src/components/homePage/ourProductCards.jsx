@@ -64,9 +64,7 @@ function MobileProductCard({ product, index }) {
 
 export default function Products() {
   const [isMobile, setIsMobile] = useState(false);
-  const [exitProgress, setExitProgress] = useState(0);
   const wrapperRef = useRef(null);
-  const rafId = useRef(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -79,55 +77,12 @@ export default function Products() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const handleScroll = useCallback(() => {
-    if (rafId.current) cancelAnimationFrame(rafId.current);
-
-    rafId.current = requestAnimationFrame(() => {
-      if (wrapperRef.current) {
-        const wrapperRect = wrapperRef.current.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-
-        // Exit progress - smoother transition with wider range
-        const wrapperBottom = wrapperRect.bottom;
-        const exitStart = viewportHeight * 0.9; // Start earlier
-        const exitEnd = viewportHeight * 0.2; // End later for smoother transition
-        
-        let ep = 0;
-        if (wrapperBottom < exitStart) {
-          ep = Math.min(Math.max((exitStart - wrapperBottom) / (exitStart - exitEnd), 0), 1);
-          // Apply easing for smoother animation
-          ep = ep * ep * (3 - 2 * ep); // smoothstep easing
-        }
-        setExitProgress(ep);
-      }
-      rafId.current = null;
-    });
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafId.current) cancelAnimationFrame(rafId.current);
-    };
-  }, [handleScroll]);
-
-  // Calculate exit animation - scale down in place with smoother values
-  const exitScale = 1 - (exitProgress * 0.25); // scales down to 0.75
-  const exitOpacity = 1 - (exitProgress * 0.4); // fades to 0.6
-
   return (
     <div ref={wrapperRef} className="relative w-full z-10">
       {/* Mobile: Sticky stacking cards like values section */}
       {isMobile ? (
         <section 
-          className="sticky top-20 w-full bg-[#f5f5f5] text-white pt-0 pb-12 transition-transform duration-100 ease-out"
-          style={{
-            transform: `scale(${exitScale})`,
-            opacity: exitOpacity,
-            transformOrigin: 'center top',
-          }}
+          className="sticky top-20 w-full bg-[#f5f5f5] text-white pt-0 pb-12"
         >
           <div className="w-full px-0">
             {/* Cards Section */}
