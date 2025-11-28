@@ -33,7 +33,7 @@ function NavBar() {
       }`}
     >
       <div className="flex justify-between items-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-xl font-bold text-gray-800">LOGO</div>
+        <div className="text-xl font-bold text-gray-800 ml-[1rem]">LOGO</div>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 lg:space-x-8 text-gray-800 font-poppins">
@@ -137,7 +137,7 @@ function NavBar() {
 
         {/* Hamburger Icon (Mobile) */}
         <div
-          className="md:hidden text-gray-800 text-2xl cursor-pointer p-1"
+          className="md:hidden text-gray-800 text-2xl cursor-pointer p-1 ml-[-0.5rem]"
           onClick={toggleMenu}
         >
           {isOpen ? <FiX /> : <FiMenu />}
