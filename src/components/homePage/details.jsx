@@ -1,5 +1,52 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+// CountUp component for animating numbers
+const CountUp = ({ end, duration = 2000, suffix = "" }) => {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const countRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (countRef.current) {
+      observer.observe(countRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime;
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      setCount(Math.floor(progress * end));
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+    requestAnimationFrame(animate);
+  }, [isVisible, end, duration]);
+
+  return (
+    <span ref={countRef}>
+      {count}{suffix}
+    </span>
+  );
+};
+
 const Card = ({ title, content, children, className = "" }) => {
   return (
     <div className={`bg-[#000000] p-8 rounded-xl shadow-lg ${className}`}>
@@ -156,15 +203,15 @@ const Details = () => {
             >
               <div className="grid grid-cols-3 gap-4 text-center mt-8">
                 <div>
-                  <p className="text-[#0D84FB] text-4xl font-bold">100+</p>
+                  <p className="text-[#0D84FB] text-4xl font-bold"><CountUp end={100} suffix="+" /></p>
                   <p className="text-gray-400 text-sm mt-2">Projects Completed</p>
                 </div>
                 <div>
-                  <p className="text-[#0D84FB] text-4xl font-bold">4+</p>
+                  <p className="text-[#0D84FB] text-4xl font-bold"><CountUp end={4} suffix="+" /></p>
                   <p className="text-gray-400 text-sm mt-2">Years Of Experience</p>
                 </div>
                 <div>
-                  <p className="text-[#0D84FB] text-4xl font-bold">5+</p>
+                  <p className="text-[#0D84FB] text-4xl font-bold"><CountUp end={5} suffix="+" /></p>
                   <p className="text-gray-400 text-sm mt-2">Countries Served</p>
                 </div>
               </div>
